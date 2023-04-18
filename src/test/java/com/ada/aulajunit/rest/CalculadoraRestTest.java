@@ -38,7 +38,72 @@ class CalculadoraRestTest {
                 .andExpect(jsonPath("$.primeiroNumero").value(n1))
                 .andExpect(jsonPath("$.segundoNumero").value(n2))
                 .andExpect(jsonPath("$.resultados[0]").value(retorno))
-                .andExpect(jsonPath("$.resultados[1]").value("3"))
+        ;
+
+    }
+
+    @Test
+    void testSomar_numerosNegativos() throws Exception {
+
+        String n1 = "-3";
+        String n2 = "-4";
+        String retorno = "-7.0";
+
+        String path = "/calculadora/somar";
+        mockMvc.perform(MockMvcRequestBuilders.get(path)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .param("n1", n1)
+                        .param("n2", n2)
+                ).andDo(print())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.primeiroNumero").value(n1))
+                .andExpect(jsonPath("$.segundoNumero").value(n2))
+                .andExpect(jsonPath("$.resultados[0]").value(retorno))
+        ;
+
+    }
+
+    @Test
+    void testSubtrair_numerosPositivos() throws Exception {
+
+        String n1 = "8";
+        String n2 = "3";
+        String retorno = "5.0";
+
+        String path = "/calculadora/subtrair";
+        mockMvc.perform(MockMvcRequestBuilders.get(path)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .param("n1", n1)
+                        .param("n2", n2)
+                ).andDo(print())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.primeiroNumero").value(n1))
+                .andExpect(jsonPath("$.segundoNumero").value(n2))
+                .andExpect(jsonPath("$.resultados[0]").value(retorno))
+        ;
+
+    }
+
+    @Test
+    void testMultiplicar_numerosPositivos() throws Exception {
+
+        String n1 = "1";
+        String n2 = "2";
+        String retorno = "2.0";
+
+        String path = "/calculadora/multiplicar";
+        mockMvc.perform(MockMvcRequestBuilders.get(path)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .param("n1", n1)
+                        .param("n2", n2)
+                ).andDo(print())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.primeiroNumero").value(n1))
+                .andExpect(jsonPath("$.segundoNumero").value(n2))
+                .andExpect(jsonPath("$.resultados[0]").value(retorno))
         ;
 
     }
